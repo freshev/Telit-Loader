@@ -8,8 +8,8 @@ Program simplifies script management on Telit boards:
 4) Loads/updates/removes scripts at Telit board  
 5) Set/Unset active script  
 6) Debugs output from second UART interface in debug window  
-7) Autonegotiate connection speed on stratup  
-8) Download usefull scripts from internet (including zlib, mqtt, urequest implementation etc).  
+7) Autonegotiates connection speed on startup  
+8) Downloads usefull scripts from internet (including zlib, mqtt, urequest implementation etc).  
 9) Syntax highlighting in "Preview script" panel  
 
 
