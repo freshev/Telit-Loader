@@ -26,16 +26,27 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonCheck = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSync = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonPlay = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonLog = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonSetActive = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonDel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBoxSpeed = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripComboBoxPort = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabelCOMPort = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButtonSetActive = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonDel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDT = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripDTSelect = new System.Windows.Forms.ToolStripSplitButton();
+            this.teleofisRX104ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iRZTG21BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
@@ -46,6 +57,7 @@
             this.FSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deviceContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setAsActiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deactivateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -76,6 +88,8 @@
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.codeRichTextBox = new System.Windows.Forms.RichTextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.contextMenuStripLocalPath = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -119,6 +133,7 @@
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
             this.splitContainerMain.SuspendLayout();
+            this.contextMenuStripLocalPath.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -126,21 +141,41 @@
             this.toolStrip.AutoSize = false;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonCheck,
             this.toolStripButtonSync,
-            this.toolStripButtonSettings,
+            this.toolStripSeparator4,
+            this.toolStripButtonPlay,
+            this.toolStripButtonStop,
+            this.toolStripButtonLog,
             this.toolStripSeparator1,
             this.toolStripButtonAdd,
+            this.toolStripButtonSetActive,
             this.toolStripSeparator2,
+            this.toolStripButtonDel,
+            this.toolStripSeparator3,
+            this.toolStripButtonSettings,
+            this.toolStripComboBoxSpeed,
             this.toolStripComboBoxPort,
             this.toolStripLabelCOMPort,
-            this.toolStripButtonSetActive,
-            this.toolStripSeparator3,
-            this.toolStripButtonDel});
+            this.toolStripSeparator5,
+            this.toolStripDT,
+            this.toolStripDTSelect});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.Size = new System.Drawing.Size(1090, 35);
             this.toolStrip.TabIndex = 0;
+            // 
+            // toolStripButtonCheck
+            // 
+            this.toolStripButtonCheck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonCheck.Image = global::TelitLoader.Properties.Resources.Connected;
+            this.toolStripButtonCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonCheck.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
+            this.toolStripButtonCheck.Name = "toolStripButtonCheck";
+            this.toolStripButtonCheck.Size = new System.Drawing.Size(24, 32);
+            this.toolStripButtonCheck.ToolTipText = "Device is not available";
+            this.toolStripButtonCheck.Click += new System.EventHandler(this.toolStripButtonCheck_Click);
             // 
             // toolStripButtonSync
             // 
@@ -149,18 +184,46 @@
             this.toolStripButtonSync.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSync.Name = "toolStripButtonSync";
             this.toolStripButtonSync.Size = new System.Drawing.Size(24, 32);
-            this.toolStripButtonSync.Text = "Sync all";
+            this.toolStripButtonSync.Text = "Sync all (Ctrl+S)";
             this.toolStripButtonSync.Click += new System.EventHandler(this.toolStripButtonSync_Click);
             // 
-            // toolStripButtonSettings
+            // toolStripSeparator4
             // 
-            this.toolStripButtonSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSettings.Image = global::TelitLoader.Properties.Resources.Settings;
-            this.toolStripButtonSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSettings.Name = "toolStripButtonSettings";
-            this.toolStripButtonSettings.Size = new System.Drawing.Size(24, 32);
-            this.toolStripButtonSettings.Text = "Sync settings";
-            this.toolStripButtonSettings.Click += new System.EventHandler(this.toolStripButtonSettings_Click);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 35);
+            // 
+            // toolStripButtonPlay
+            // 
+            this.toolStripButtonPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPlay.Image = global::TelitLoader.Properties.Resources.Play;
+            this.toolStripButtonPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPlay.Name = "toolStripButtonPlay";
+            this.toolStripButtonPlay.Size = new System.Drawing.Size(24, 32);
+            this.toolStripButtonPlay.Text = "Run active script";
+            this.toolStripButtonPlay.Click += new System.EventHandler(this.toolStripButtonPlay_Click);
+            // 
+            // toolStripButtonStop
+            // 
+            this.toolStripButtonStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonStop.Enabled = false;
+            this.toolStripButtonStop.Image = global::TelitLoader.Properties.Resources.Stop;
+            this.toolStripButtonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonStop.Name = "toolStripButtonStop";
+            this.toolStripButtonStop.Size = new System.Drawing.Size(24, 32);
+            this.toolStripButtonStop.Text = "Stop script";
+            this.toolStripButtonStop.Visible = false;
+            this.toolStripButtonStop.Click += new System.EventHandler(this.toolStripButtonStop_Click);
+            // 
+            // toolStripButtonLog
+            // 
+            this.toolStripButtonLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonLog.Image = global::TelitLoader.Properties.Resources.Log;
+            this.toolStripButtonLog.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonLog.Name = "toolStripButtonLog";
+            this.toolStripButtonLog.Size = new System.Drawing.Size(24, 32);
+            this.toolStripButtonLog.Text = "Show device log (SER2)";
+            this.toolStripButtonLog.CheckedChanged += new System.EventHandler(this.toolStripButtonLog_CheckedChanged);
+            this.toolStripButtonLog.Click += new System.EventHandler(this.toolStripButtonLog_Click);
             // 
             // toolStripSeparator1
             // 
@@ -174,13 +237,56 @@
             this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
             this.toolStripButtonAdd.Size = new System.Drawing.Size(24, 32);
-            this.toolStripButtonAdd.Text = "Open local folder";
-            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
+            this.toolStripButtonAdd.Text = "Open local folder (Ctrl+L)";
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.localFolder_Click);
+            // 
+            // toolStripButtonSetActive
+            // 
+            this.toolStripButtonSetActive.CheckOnClick = true;
+            this.toolStripButtonSetActive.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSetActive.Image = global::TelitLoader.Properties.Resources.Active;
+            this.toolStripButtonSetActive.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSetActive.Name = "toolStripButtonSetActive";
+            this.toolStripButtonSetActive.Size = new System.Drawing.Size(24, 32);
+            this.toolStripButtonSetActive.Text = "Set script as active";
+            this.toolStripButtonSetActive.Click += new System.EventHandler(this.toolStripButtonSetActive_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
+            // 
+            // toolStripButtonDel
+            // 
+            this.toolStripButtonDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDel.Image = global::TelitLoader.Properties.Resources.Del;
+            this.toolStripButtonDel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDel.Name = "toolStripButtonDel";
+            this.toolStripButtonDel.Size = new System.Drawing.Size(24, 32);
+            this.toolStripButtonDel.Text = "Delete script";
+            this.toolStripButtonDel.Click += new System.EventHandler(this.toolStripButtonDel_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
+            // 
+            // toolStripButtonSettings
+            // 
+            this.toolStripButtonSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSettings.Image = global::TelitLoader.Properties.Resources.Settings;
+            this.toolStripButtonSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSettings.Name = "toolStripButtonSettings";
+            this.toolStripButtonSettings.Size = new System.Drawing.Size(24, 32);
+            this.toolStripButtonSettings.Text = "Parameters (Ctrl+P)";
+            this.toolStripButtonSettings.Click += new System.EventHandler(this.toolStripButtonSettings_Click);
+            // 
+            // toolStripComboBoxSpeed
+            // 
+            this.toolStripComboBoxSpeed.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripComboBoxSpeed.Name = "toolStripComboBoxSpeed";
+            this.toolStripComboBoxSpeed.Size = new System.Drawing.Size(121, 35);
+            this.toolStripComboBoxSpeed.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxSpeed_SelectedIndexChanged);
             // 
             // toolStripComboBoxPort
             // 
@@ -197,30 +303,54 @@
             this.toolStripLabelCOMPort.Size = new System.Drawing.Size(74, 32);
             this.toolStripLabelCOMPort.Text = "COM port";
             // 
-            // toolStripButtonSetActive
+            // toolStripSeparator5
             // 
-            this.toolStripButtonSetActive.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSetActive.Image = global::TelitLoader.Properties.Resources.Active;
-            this.toolStripButtonSetActive.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSetActive.Name = "toolStripButtonSetActive";
-            this.toolStripButtonSetActive.Size = new System.Drawing.Size(24, 32);
-            this.toolStripButtonSetActive.Text = "Set script as active";
-            this.toolStripButtonSetActive.Click += new System.EventHandler(this.toolStripButtonSetActive_Click);
+            this.toolStripSeparator5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 35);
             // 
-            // toolStripSeparator3
+            // toolStripDT
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 35);
+            this.toolStripDT.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripDT.Name = "toolStripDT";
+            this.toolStripDT.ReadOnly = true;
+            this.toolStripDT.Size = new System.Drawing.Size(35, 35);
+            this.toolStripDT.Text = "DT:1";
+            this.toolStripDT.ToolTipText = "Device type";
             // 
-            // toolStripButtonDel
+            // toolStripDTSelect
             // 
-            this.toolStripButtonDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDel.Image = global::TelitLoader.Properties.Resources.Del;
-            this.toolStripButtonDel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDel.Name = "toolStripButtonDel";
-            this.toolStripButtonDel.Size = new System.Drawing.Size(24, 32);
-            this.toolStripButtonDel.Text = "Delete script";
-            this.toolStripButtonDel.Click += new System.EventHandler(this.toolStripButtonDel_Click);
+            this.toolStripDTSelect.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripDTSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDTSelect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.teleofisRX104ToolStripMenuItem,
+            this.iRZTG21BToolStripMenuItem});
+            this.toolStripDTSelect.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDTSelect.Image")));
+            this.toolStripDTSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDTSelect.Name = "toolStripDTSelect";
+            this.toolStripDTSelect.Size = new System.Drawing.Size(73, 32);
+            this.toolStripDTSelect.Text = "Device";
+            this.toolStripDTSelect.ToolTipText = "Select device to change device type";
+            // 
+            // teleofisRX104ToolStripMenuItem
+            // 
+            this.teleofisRX104ToolStripMenuItem.Checked = true;
+            this.teleofisRX104ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.teleofisRX104ToolStripMenuItem.Name = "teleofisRX104ToolStripMenuItem";
+            this.teleofisRX104ToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.teleofisRX104ToolStripMenuItem.Tag = "1";
+            this.teleofisRX104ToolStripMenuItem.Text = "Teleofis RX-104";
+            this.teleofisRX104ToolStripMenuItem.ToolTipText = "Device type = 1 (DT:1) \rASC0 aka UART1 aka SER connected to RS485 \rASC1 aka UART2 aka SE" +
+    "R2 should be wired to GL-865 directly (pins 44-46)";
+            // 
+            // iRZTG21BToolStripMenuItem
+            // 
+            this.iRZTG21BToolStripMenuItem.Name = "iRZTG21BToolStripMenuItem";
+            this.iRZTG21BToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.iRZTG21BToolStripMenuItem.Tag = "2";
+            this.iRZTG21BToolStripMenuItem.Text = "IRZ TG-21B";
+            this.iRZTG21BToolStripMenuItem.ToolTipText = "Device type = 2 (DT:2) \rASC0 aka UART1 aka SER connected to RS232 \rASC1 aka UART2 aka SE" +
+    "R2 connected to RS485\rPort separation via command AT#GPIO=3,1,1";
             // 
             // statusStrip
             // 
@@ -228,7 +358,7 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel,
             this.toolStripProgressBar});
-            this.statusStrip.Location = new System.Drawing.Point(0, 640);
+            this.statusStrip.Location = new System.Drawing.Point(0, 866);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
             this.statusStrip.Size = new System.Drawing.Size(1090, 26);
@@ -238,7 +368,7 @@
             // 
             this.toolStripStatusLabel.AutoSize = false;
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(414, 21);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(800, 21);
             this.toolStripStatusLabel.Text = "Ready";
             this.toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -263,7 +393,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer.Size = new System.Drawing.Size(1084, 394);
+            this.splitContainer.Size = new System.Drawing.Size(1084, 548);
             this.splitContainer.SplitterDistance = 280;
             this.splitContainer.TabIndex = 3;
             // 
@@ -275,7 +405,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(280, 394);
+            this.groupBox1.Size = new System.Drawing.Size(280, 548);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Device files";
@@ -308,7 +438,7 @@
             this.dataGridViewDevice.ShowCellErrors = false;
             this.dataGridViewDevice.ShowEditingIcon = false;
             this.dataGridViewDevice.ShowRowErrors = false;
-            this.dataGridViewDevice.Size = new System.Drawing.Size(274, 373);
+            this.dataGridViewDevice.Size = new System.Drawing.Size(274, 527);
             this.dataGridViewDevice.TabIndex = 0;
             this.dataGridViewDevice.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDevice_CellClick);
             this.dataGridViewDevice.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDevice_CellMouseDown);
@@ -334,10 +464,11 @@
             // 
             this.deviceContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.deviceContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setAsActiveToolStripMenuItem});
+            this.setAsActiveToolStripMenuItem,
+            this.deactivateToolStripMenuItem});
             this.deviceContextMenu.Name = "deviceContextMenu";
             this.deviceContextMenu.ShowImageMargin = false;
-            this.deviceContextMenu.Size = new System.Drawing.Size(136, 30);
+            this.deviceContextMenu.Size = new System.Drawing.Size(136, 56);
             // 
             // setAsActiveToolStripMenuItem
             // 
@@ -347,6 +478,13 @@
             this.setAsActiveToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.setAsActiveToolStripMenuItem.Text = "Set as active";
             this.setAsActiveToolStripMenuItem.Click += new System.EventHandler(this.setAsActiveToolStripMenuItem_Click);
+            // 
+            // deactivateToolStripMenuItem
+            // 
+            this.deactivateToolStripMenuItem.Name = "deactivateToolStripMenuItem";
+            this.deactivateToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.deactivateToolStripMenuItem.Text = "Deactivate";
+            this.deactivateToolStripMenuItem.Click += new System.EventHandler(this.deactivateToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -361,7 +499,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 394);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 548);
             this.splitContainer1.SplitterDistance = 420;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -379,8 +517,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer2.Size = new System.Drawing.Size(420, 394);
-            this.splitContainer2.SplitterDistance = 137;
+            this.splitContainer2.Size = new System.Drawing.Size(420, 548);
+            this.splitContainer2.SplitterDistance = 150;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -399,7 +537,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer3.Size = new System.Drawing.Size(420, 137);
+            this.splitContainer3.Size = new System.Drawing.Size(420, 150);
             this.splitContainer3.SplitterDistance = 25;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -446,7 +584,7 @@
             this.splitContainer5.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer5.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer5.Size = new System.Drawing.Size(391, 137);
+            this.splitContainer5.Size = new System.Drawing.Size(391, 150);
             this.splitContainer5.SplitterDistance = 25;
             this.splitContainer5.TabIndex = 0;
             // 
@@ -485,7 +623,7 @@
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox2.Size = new System.Drawing.Size(362, 137);
+            this.groupBox2.Size = new System.Drawing.Size(362, 150);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "DB sources";
@@ -519,7 +657,7 @@
             this.dataGridViewDBSource.ShowCellErrors = false;
             this.dataGridViewDBSource.ShowEditingIcon = false;
             this.dataGridViewDBSource.ShowRowErrors = false;
-            this.dataGridViewDBSource.Size = new System.Drawing.Size(356, 116);
+            this.dataGridViewDBSource.Size = new System.Drawing.Size(356, 129);
             this.dataGridViewDBSource.TabIndex = 1;
             this.dataGridViewDBSource.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDBSource_CellClick);
             this.dataGridViewDBSource.SelectionChanged += new System.EventHandler(this.dataGridViewDBSource_SelectionChanged);
@@ -563,7 +701,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.splitContainer6);
-            this.splitContainer4.Size = new System.Drawing.Size(420, 253);
+            this.splitContainer4.Size = new System.Drawing.Size(420, 394);
             this.splitContainer4.SplitterDistance = 25;
             this.splitContainer4.TabIndex = 1;
             // 
@@ -597,7 +735,7 @@
             this.splitContainer6.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer6.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.splitContainer6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.splitContainer6.Size = new System.Drawing.Size(391, 253);
+            this.splitContainer6.Size = new System.Drawing.Size(391, 394);
             this.splitContainer6.SplitterDistance = 25;
             this.splitContainer6.TabIndex = 1;
             // 
@@ -623,7 +761,7 @@
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox3.Size = new System.Drawing.Size(362, 253);
+            this.groupBox3.Size = new System.Drawing.Size(362, 394);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DB compiled";
@@ -657,7 +795,7 @@
             this.dataGridViewDBCompiled.ShowCellErrors = false;
             this.dataGridViewDBCompiled.ShowEditingIcon = false;
             this.dataGridViewDBCompiled.ShowRowErrors = false;
-            this.dataGridViewDBCompiled.Size = new System.Drawing.Size(356, 232);
+            this.dataGridViewDBCompiled.Size = new System.Drawing.Size(356, 373);
             this.dataGridViewDBCompiled.TabIndex = 1;
             this.dataGridViewDBCompiled.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDBCompiled_CellClick);
             this.dataGridViewDBCompiled.SelectionChanged += new System.EventHandler(this.dataGridViewDBCompiled_SelectionChanged);
@@ -694,7 +832,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(376, 394);
+            this.groupBox4.Size = new System.Drawing.Size(376, 548);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Local files @";
@@ -727,7 +865,7 @@
             this.dataGridViewLocal.ShowCellErrors = false;
             this.dataGridViewLocal.ShowEditingIcon = false;
             this.dataGridViewLocal.ShowRowErrors = false;
-            this.dataGridViewLocal.Size = new System.Drawing.Size(370, 373);
+            this.dataGridViewLocal.Size = new System.Drawing.Size(370, 527);
             this.dataGridViewLocal.TabIndex = 1;
             this.dataGridViewLocal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLocal_CellClick);
             this.dataGridViewLocal.SelectionChanged += new System.EventHandler(this.dataGridViewLocal_SelectionChanged);
@@ -773,38 +911,58 @@
             // splitContainerMain.Panel2
             // 
             this.splitContainerMain.Panel2.Controls.Add(this.codeRichTextBox);
-            this.splitContainerMain.Size = new System.Drawing.Size(1090, 586);
-            this.splitContainerMain.SplitterDistance = 400;
+            this.splitContainerMain.Size = new System.Drawing.Size(1090, 812);
+            this.splitContainerMain.SplitterDistance = 554;
             this.splitContainerMain.TabIndex = 4;
             // 
             // codeRichTextBox
             // 
             this.codeRichTextBox.AutoWordSelection = true;
             this.codeRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeRichTextBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.codeRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.codeRichTextBox.Name = "codeRichTextBox";
             this.codeRichTextBox.ReadOnly = true;
-            this.codeRichTextBox.Size = new System.Drawing.Size(1090, 182);
+            this.codeRichTextBox.Size = new System.Drawing.Size(1090, 254);
             this.codeRichTextBox.TabIndex = 0;
             this.codeRichTextBox.Text = "";
-            this.codeRichTextBox.WordWrap = false;
             this.codeRichTextBox.TextChanged += new System.EventHandler(this.codeRichTextBox_TextChanged);
             this.codeRichTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.codeRichTextBox_MouseDown);
+            // 
+            // contextMenuStripLocalPath
+            // 
+            this.contextMenuStripLocalPath.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripLocalPath.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemCopy});
+            this.contextMenuStripLocalPath.Name = "contextMenuStripLocalPath";
+            this.contextMenuStripLocalPath.ShowImageMargin = false;
+            this.contextMenuStripLocalPath.Size = new System.Drawing.Size(122, 28);
+            this.contextMenuStripLocalPath.Text = "Copy path";
+            // 
+            // toolStripMenuItemCopy
+            // 
+            this.toolStripMenuItemCopy.Name = "toolStripMenuItemCopy";
+            this.toolStripMenuItemCopy.Size = new System.Drawing.Size(121, 24);
+            this.toolStripMenuItemCopy.Text = "Copy path";
+            this.toolStripMenuItemCopy.ToolTipText = "Copy folder path to clipboard";
+            this.toolStripMenuItemCopy.Click += new System.EventHandler(this.toolStripMenuItemCopy_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 666);
+            this.ClientSize = new System.Drawing.Size(1090, 892);
             this.Controls.Add(this.splitContainerMain);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "MainForm";
             this.Text = "Telit Loader";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -854,6 +1012,7 @@
             this.splitContainerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
             this.splitContainerMain.ResumeLayout(false);
+            this.contextMenuStripLocalPath.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -905,13 +1064,27 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FSize;
         private System.Windows.Forms.SplitContainer splitContainerMain;
-        private System.Windows.Forms.RichTextBox codeRichTextBox;
         private System.Windows.Forms.ContextMenuStrip deviceContextMenu;
         private System.Windows.Forms.ToolStripMenuItem setAsActiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonSetActive;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButtonSettings;
         private System.Windows.Forms.ToolTip toolTip;
+        public System.Windows.Forms.ToolStripButton toolStripButtonCheck;
+        public System.Windows.Forms.ToolStripComboBox toolStripComboBoxSpeed;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripLocalPath;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCopy;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPlay;
+        private System.Windows.Forms.ToolStripButton toolStripButtonStop;
+        private System.Windows.Forms.ToolStripMenuItem deactivateToolStripMenuItem;
+        public System.Windows.Forms.RichTextBox codeRichTextBox;
+        private System.Windows.Forms.ToolStripButton toolStripButtonLog;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSplitButton toolStripDTSelect;
+        private System.Windows.Forms.ToolStripTextBox toolStripDT;
+        public System.Windows.Forms.ToolStripMenuItem iRZTG21BToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem teleofisRX104ToolStripMenuItem;
     }
 }
 

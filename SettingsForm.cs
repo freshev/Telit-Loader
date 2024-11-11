@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.IO.Ports;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace TelitLoader {
@@ -10,9 +11,18 @@ namespace TelitLoader {
         public bool Remove { get; set; }
         public bool Auto { get; set;  }
         public int AutoSec { get; set; }
+        public string ScriptCommon { get; set;  }
+        public string ScriptTelit { get; set; }
+        public string DebugCOMPort { get; set; }
+        public string DebugCOMSpeed { get; set; }
+        private MainForm mainForm;
+        private bool canUsePort = false;
+        private bool deviceOpened = false;        
 
-        public SettingsForm() {
-            InitializeComponent();           
+        public SettingsForm(MainForm mainForm) {            
+            InitializeComponent();
+
+            this.mainForm = mainForm;
             string secondTT = "current script will be executed at startup only if the user does not send\n" +
                                              "any AT command on the serial port for the time interval specified in\n" +
                                              "<script_start_to> parameter, otherwise the Easy Script® interpreter will\n" +
@@ -35,15 +45,21 @@ namespace TelitLoader {
             toolTip.SetToolTip(checkBoxRemove, "Remove unused scripts from device during Sync");
             toolTip.SetToolTip(checkBoxAuto, "Periodically synchronize device and DB files with local files");
             toolTip.SetToolTip(numericUpDownAutoSec, "Synchronize every n-th second");
+            toolTip.SetToolTip(textBoxScriptCommon, "URL with files to download");
+            toolTip.SetToolTip(textBoxScriptTelit, "URL with files to download.\n" +
+                               "File names that match file names from \"Common\" folder will be overwritten.");
             Mode = 1;
             Runtime = 10;
             Secured = true;
             Remove = true;
             Auto = false;
             AutoSec = 10;
+            buttonPortCheck.BackgroundImage = Properties.Resources.Disconnected;
+            DebugCOMPort = "";
+            DebugCOMSpeed = "";
         }
 
-        private void buttonOK_Click(object sender, EventArgs e) {
+        private void buttonOK_Click(object sender, EventArgs e) {            
             if (radioButton0.Checked) Mode = 0;
             if (radioButton1.Checked) Mode = 1;
             if (radioButton2.Checked) Mode = 2;
@@ -52,7 +68,12 @@ namespace TelitLoader {
             Remove = checkBoxRemove.Checked;
             Auto = checkBoxAuto.Checked;
             AutoSec = (int)numericUpDownAutoSec.Value;
+            ScriptCommon = textBoxScriptCommon.Text + (!textBoxScriptCommon.Text.EndsWith("/") ? "/" : "");
+            ScriptTelit = textBoxScriptTelit.Text + (!textBoxScriptTelit.Text.EndsWith("/") ? "/" : "");
             Close();
+        }
+        private void SettingsForm_FormClosed(object sender, FormClosedEventArgs e) {
+            if (mainForm != null && mainForm.debugDevice != null) mainForm.debugDevice.ClosePort();
         }
 
         private void SettingsForm_Load(object sender, EventArgs e) {
@@ -64,6 +85,18 @@ namespace TelitLoader {
             checkBoxRemove.Checked = Remove;
             checkBoxAuto.Checked = Auto;
             if (AutoSec >= 10 && AutoSec <= 60) numericUpDownAutoSec.Value = AutoSec;
+
+            textBoxScriptCommon.Text = ScriptCommon;
+            textBoxScriptTelit.Text = ScriptTelit; 
+
+            comboBoxCOMPort.Items.Clear();
+            comboBoxCOMPort.Items.AddRange(SerialPort.GetPortNames());
+            if (DebugCOMPort != null && comboBoxCOMPort.Items.Contains(DebugCOMPort)) comboBoxCOMPort.SelectedItem = DebugCOMPort;
+            else if (comboBoxCOMPort.Items.Count > 0) comboBoxCOMPort.SelectedItem = comboBoxCOMPort.Items[0];
+
+            comboBoxCOMSpeed.Items.AddRange(new string[] { "9600", "19200", "38400", "57600", "115200" });
+            if (DebugCOMSpeed != null && comboBoxCOMSpeed.Items.Contains(DebugCOMSpeed)) comboBoxCOMSpeed.SelectedItem = DebugCOMSpeed;
+            else if (comboBoxCOMSpeed.Items.Count > 0) comboBoxCOMSpeed.SelectedItem = comboBoxCOMSpeed.Items[0];
         }
 
         private void radioButton0_CheckedChanged(object sender, EventArgs e) {
@@ -81,5 +114,44 @@ namespace TelitLoader {
         private void checkBoxAuto_CheckedChanged(object sender, EventArgs e) {
             numericUpDownAutoSec.Enabled = checkBoxAuto.Checked;
         }
+
+        private void comboBoxCOMPort_SelectedIndexChanged(object sender, EventArgs e) {
+            if (mainForm !=null && mainForm.debugDevice != null && canUsePort == true) {
+                if (mainForm.debugDevice.getPort() != null) {
+                    if (mainForm.debugDevice.getPort().PortName != comboBoxCOMPort.Text) mainForm.debugDevice.ClosePort();
+                    else mainForm.debugDevice.CloseMainPort();
+                }
+                if(mainForm.toolStripComboBoxPort.SelectedItem.ToString() == comboBoxCOMPort.Text) deviceOpened = mainForm.debugDevice.OpenMainPort();
+                else deviceOpened = mainForm.debugDevice.OpenPort();
+            }
+            DebugCOMPort = comboBoxCOMPort.SelectedItem.ToString();
+        }
+
+        private void comboBoxCOMSpeed_SelectedIndexChanged(object sender, EventArgs e) {
+            bool speedChanged = false;
+            if (deviceOpened) {
+                string speed = comboBoxCOMSpeed.SelectedItem.ToString();
+                if (mainForm != null && mainForm.device != null && mainForm.debugDevice != null && MessageBox.Show(this, "Change DebugPort port speed to " + speed + " ?", "Change device settings", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                    if (mainForm.device.SetDebugSpeed(speed)) {
+                        mainForm.ShowStatus("Changed DebugPort speed to " + speed);
+                        speedChanged = true;
+                        //Thread.Sleep(500);
+                    }
+                }
+            }
+
+            if (mainForm != null && mainForm.debugDevice != null && !speedChanged) {
+                if (mainForm.debugDevice.getPort() != null) {
+                    if (mainForm.debugDevice.getPort().PortName != comboBoxCOMPort.Text) mainForm.debugDevice.ClosePort();
+                    else mainForm.debugDevice.CloseMainPort();
+                }
+                if (mainForm.toolStripComboBoxPort.SelectedItem.ToString() == comboBoxCOMPort.Text) deviceOpened = mainForm.debugDevice.OpenMainPort();
+                else deviceOpened = mainForm.debugDevice.OpenPort();
+            }
+            DebugCOMSpeed = comboBoxCOMSpeed.SelectedItem.ToString();
+            
+            canUsePort = true;
+        }
+        
     }
 }

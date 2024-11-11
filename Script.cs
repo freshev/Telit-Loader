@@ -4,6 +4,7 @@ namespace TelitLoader {
 
     public enum ScriptType {
         Binary,
+        DeviceType,
         Python,
         PythonCompiled,
         PythonOptimized,
@@ -25,6 +26,7 @@ namespace TelitLoader {
 
     [Serializable]
     public class Script {
+        public const string DeviceTypeFileName = "Device.type";
         public string name;
         public long size;
         public DateTime date;        
@@ -32,6 +34,7 @@ namespace TelitLoader {
         public ScriptStoreType storeType;
         public ScriptType type;
         public bool active;
+        public bool force = false;
 
         public Script(ScriptStoreType type, string name, long size) {
             this.storeType = type;
@@ -50,6 +53,7 @@ namespace TelitLoader {
         }
         private void UpdateType() {
             type = ScriptType.Binary;
+            if (name.Equals(DeviceTypeFileName)) type = ScriptType.DeviceType;
             if (name.EndsWith("py")) type = ScriptType.Python;
             if (name.EndsWith("pyc")) type = ScriptType.PythonCompiled;
             if (name.EndsWith("pyo")) type = ScriptType.PythonOptimized;
@@ -65,6 +69,7 @@ namespace TelitLoader {
 
         public static string getScriptDescription(ScriptType type) {
             string ttText = "Binary file";
+            if (type == ScriptType.DeviceType) ttText = "Device type settings file";
             if (type == ScriptType.Python) ttText = "Python script";
             if (type == ScriptType.PythonCompiled) ttText = "Compiled python script";
             if (type == ScriptType.PythonOptimized) ttText = "Compiled and optimized python script";

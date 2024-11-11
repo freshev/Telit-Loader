@@ -7,6 +7,7 @@ import sys
 import imp
 import os
 MAGIC = imp.get_magic()
+__debug__ = 0
 
 def wr_long(f, x):
     "Internal; write a 32-bit int to a file in little-endian order."
